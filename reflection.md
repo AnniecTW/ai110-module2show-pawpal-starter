@@ -6,6 +6,21 @@
 
 - Briefly describe your initial UML design.
 - What classes did you include, and what responsibilities did you assign to each?
+  My UML design includes classes Task, User, and Pet.
+  1. Task:
+  - Id
+  - Type
+  2. User:
+  - Id
+  - Available time
+  - Preference
+  - add_pet()
+  - schedule_task()
+  3. Pet:
+  - Id
+  4. User_task
+  - Id
+  - Assigned_time
 
 **b. Design changes**
 
