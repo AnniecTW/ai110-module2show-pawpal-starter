@@ -143,3 +143,53 @@ def test_detect_time_conflicts_returns_warning_for_overlapping_tasks():
     assert "Conflict at 08:00 on 2026-03-31" in warnings[0]
     assert "Bella: Breakfast" in warnings[0]
     assert "Luna: Walk" in warnings[0]
+
+
+def test_sort_by_time_keeps_same_time_tasks_and_puts_no_time_last():
+    bella = Pet("Bella", "cat")
+    luna = Pet("Luna", "dog")
+    bella.add_task(Task("Breakfast", 15, "high", False, "07:30"))
+    luna.add_task(Task("Medication", 10, "high", False, "07:30"))
+    bella.add_task(Task("Grooming", 20, "low"))
+    scheduler = Scheduler(User("Ann", [bella, luna]))
+
+    result = scheduler.sort_by_time()
+
+    assert [task.title for _, task in result] == [
+        "Breakfast",
+        "Medication",
+        "Grooming",
+    ]
+
+
+def test_pet_with_no_tasks_returns_empty_lists():
+    bella = Pet("Bella", "cat")
+    scheduler = Scheduler(User("Ann", [bella]))
+
+    assert scheduler.get_all_tasks() == []
+    assert scheduler.sort_by_time() == []
+    assert scheduler.filter_tasks(pet_name="Bella") == []
+
+
+def test_detect_time_conflicts_ignores_completed_tasks():
+    bella = Pet("Bella", "cat")
+    luna = Pet("Luna", "dog")
+    bella.add_task(Task("Breakfast", 15, "high", True, "08:00", due_date=date(2026, 3, 31)))
+    luna.add_task(Task("Walk", 30, "medium", False, "08:00", due_date=date(2026, 3, 31)))
+    scheduler = Scheduler(User("Ann", [bella, luna]))
+
+    warnings = scheduler.detect_time_conflicts()
+
+    assert warnings == []
+
+
+def test_marking_completed_recurring_task_again_does_not_duplicate_occurrence():
+    pet = Pet("Bella", "cat")
+    task = Task("Feeding", 15, "high", True, "08:00", "daily", date(2026, 3, 31))
+    pet.add_task(task)
+    scheduler = Scheduler(User("Ann", [pet]))
+
+    result = scheduler.mark_task_complete("Bella", "Feeding")
+
+    assert result is True
+    assert len(pet.tasks) == 1
