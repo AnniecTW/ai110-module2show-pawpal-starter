@@ -27,6 +27,13 @@
 - Did your design change during implementation?
 - If yes, describe at least one change and why you made it.
 
+| Class     | Add                                   | Why                                |
+| --------- | ------------------------------------- | ---------------------------------- |
+| Pet       | `name: str`, `species: str`           | Identify pets and match task types |
+| Task      | `duration: int`, `priority: int`      | Enable scheduling logic            |
+| Scheduler | `pet: Pet`                            | Link tasks to specific pets        |
+| User      | time slots (instead of single string) | Enable conflict detection          |
+
 ---
 
 ## 2. Scheduling Logic and Tradeoffs
@@ -40,6 +47,7 @@
 
 - Describe one tradeoff your scheduler makes.
 - Why is that tradeoff reasonable for this scenario?
+  For the `detect_time_conflicts()` function in the `Scheduler` class, I followed an AI suggestion to simplify the logic by reducing nested object handling. Instead of storing full `Pet` and `Task` objects, I now store only the necessary string fields, which makes the code more readable and avoids unnecessary data structures.
 
 ---
 

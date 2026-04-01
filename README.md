@@ -22,6 +22,10 @@ Your final app should:
 - Display the plan clearly (and ideally explain the reasoning)
 - Include tests for the most important scheduling behaviors
 
+## Smarter Scheduling
+
+The scheduler now supports task times, priority-based ordering, and filtering by pet or completion status. It also handles recurring daily and weekly tasks by automatically creating the next occurrence with an updated due date when a recurring task is completed. If two incomplete tasks are scheduled for the same date and time, the system returns a warning so the app can surface the conflict without crashing.
+
 ## Getting started
 
 ### Setup
