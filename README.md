@@ -1,6 +1,4 @@
-# PawPal+ (Module 2 Project)
-
-You are building **PawPal+**, a Streamlit app that helps a pet owner plan care tasks for their pet.
+# PawPal+
 
 ## Scenario
 
@@ -71,4 +69,4 @@ Confidence Level (1–5 stars) in the system's reliability: 4.5 stars
 
 ## 📸 Demo
 
-<img src='/ai110-module2show-pawpal-starter/image.png' title='PawPal App' width='' alt='PawPal App' class='center-block' /></a>
+<img src='/image.png' title='PawPal App' width='' alt='PawPal App' class='center-block' /></a>
